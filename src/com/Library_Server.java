@@ -10,6 +10,7 @@ public class Library_Server {
     private int port = 1234;
     private ServerSocket serverSocket;
     static ExecutorService executorService;
+    ClientInfo ci=new ClientInfo();
 
     public Library_Server() {
         try {
@@ -26,6 +27,8 @@ public class Library_Server {
             try {
                 System.out.println("wait client connect...");
                 socket = serverSocket.accept();
+                ci.clientList.add(new Client("","",socket,String.valueOf(System.currentTimeMillis()/1000),false));
+                executorService.execute(new Library_Receive(socket));
             } catch (Exception e) {
                 e.printStackTrace();
             }
