@@ -7,7 +7,7 @@ public class Client {
     private String serialnumber;
     private Socket socket;
     private String lastMSGtime;
-    private boolean auth=false;
+    private boolean auth = false;
 
     public boolean isAuth() {
         return auth;

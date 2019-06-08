@@ -17,6 +17,8 @@ public class Msgcode {
                 return "login failed, do not have an account";
             case 1004:
                 return "login failed, id is banned";
+            case 1005:
+                return "login failed, initialization failed";
             case 1010:
                 return "create";
             case 1011:
@@ -27,10 +29,6 @@ public class Msgcode {
                 return "create failed, id is not unique";
             case 1014:
                 return "create failed, id is banned";
-            case 1020:
-                return "pause";
-            case 1021:
-                return "pause succeeded";
             case 1022:
                 return "pause failed";
             case 1023:
@@ -86,8 +84,6 @@ public class Msgcode {
                 return login(s);
             case 1010:
                 return create(s);
-            case 1020:
-                return pause(s);
             case 1023:
                 return expire(s);
             case 1031:
@@ -132,13 +128,6 @@ public class Msgcode {
         }
     }
 
-    public static int pause(String[] s) {
-        if (Database.update(Sql.pause, s) > 0) {
-            return 1021;
-        } else {
-            return 1022;
-        }
-    }
 
     public static int expire(String[] s) {
         String s2 = s[s.length - 1];
@@ -146,7 +135,8 @@ public class Msgcode {
         for (int i = 0; i < s3.length; i++) {
             s3[i] = s[i];
         }
-        if (Database.query(Sql.expire, s3).get(0)[0].equals(s2)) {
+        String[] s4 = {Database.query(Sql.getLoc, s3).get(0)[0]};
+        if (Database.query(Sql.getEndTime, s4).get(0)[0].equals(s2)) {
             return 1024;
         } else {
             return 1025;
@@ -162,6 +152,10 @@ public class Msgcode {
         if ((Database.query(Sql.getUse, s).size() < 1)) {
             return 1034;
         } else if (Database.query(Sql.getUse, s).get(0)[0].equals("0")) {
+            String[] s2 = {String.valueOf(System.currentTimeMillis() / 1000 + 1800), s[0]};
+            if (!(Database.update(Sql.setEndTime, s2) > 0)) {
+                return 1022;
+            }
             return 1032;
         } else {
             return 1033;

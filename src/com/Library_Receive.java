@@ -4,10 +4,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.Socket;
 
-public class Library_Receive extends Thread{
+public class Library_Receive extends Thread {
     public Socket socket;
     public String s;
-    public  boolean isclose=false;
+    public boolean isclose = false;
+
     @Override
     public void run() {
         while (!isclose) {
@@ -16,13 +17,13 @@ public class Library_Receive extends Thread{
                 int len = 0;
                 byte[] buf = new byte[1024];
                 while ((len = in.read(buf)) != -1) {
-                    s= new String(buf, 0, len);
+                    s = new String(buf, 0, len);
                     System.out.println(s);
-                    Controller c=new Controller();
-                    c.function(socket,s);
+                    Controller c = new Controller();
+                    Library_Send.sendmessage(String.valueOf(c.function(socket, s)),socket);
                 }
             } catch (IOException e) {
-                isclose=true;
+                isclose = true;
                 System.out.println("Connection terminated.");
                 //e.printStackTrace();
                 try {

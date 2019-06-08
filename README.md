@@ -1,6 +1,6 @@
 # Library system
-###Version:0.2
-###Update 2019/05/19
+###Version:0.3
+###Update 2019/05/26
 ```sh 
 This project is made for the university library management.
 It provides the function of reserving seat, asking for short leave and giving up seat.
@@ -17,5 +17,5 @@ Json convert model
 Android Client
     > everything
 Java Server
-    > method funciton()
+    > response by Json
 ```

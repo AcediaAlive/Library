@@ -7,8 +7,10 @@ public class Sql {
     static String setBan = "UPDATE \"public\".\"student\" SET \"ban\"=? WHERE (\"id\"=?)";
     static String getUse = "SELECT \"public\".seat.use FROM \"public\".seat WHERE \"public\".seat.loc LIKE ?";
     static String deleteAccount = "DELETE FROM \"public\".\"student\" WHERE (\"serialnumber\"=?)";
-    static String pause = "UPDATE \"public\".\"seat\" SET \"endtime\"=? WHERE (\"loc\"=?)";
-    static String expire = "SELECT \"public\".seat.endtime FROM \"public\".seat WHERE \"public\".seat.loc LIKE ?";
+    static String setEndTime = "UPDATE \"public\".\"seat\" SET \"endtime\"=? WHERE (\"loc\"=?)";
     static String seat = "SELECT \"public\".seat.*FROM \"public\".seat";
     static String log = "SELECT \"public\".log.* FROM \"public\".log";
+    static String getEndTime = "SELECT \"public\".seat.endtime FROM \"public\".seat WHERE \"public\".seat.loc LIKE ?";
+    static String getLoc = "SELECT \"public\".student.loc FROM \"public\".student WHERE \"public\".student.serialnumber LIKE ?";
+    static String getId = "SELECT \"public\".student.\"id\" FROM \"public\".student WHERE \"public\".student.serialnumber LIKE ?";
 }

@@ -7,11 +7,11 @@ import java.net.Socket;
 public class Library_Send {
     static class sendMessThread extends Thread {
         String messsgae = "";
-        Socket socket=null;
+        Socket socket = null;
 
-        public sendMessThread(String messsgae,Socket socket) {
+        public sendMessThread(String messsgae, Socket socket) {
             this.messsgae = messsgae;
-            this.socket=socket;
+            this.socket = socket;
         }
 
         @Override
@@ -52,6 +52,6 @@ public class Library_Send {
 
     public static void sendmessage(String msg, Socket socket) {
         //new sendMessThread(msg,socket).start();
-        Library_Server.executorService.execute(new sendMessThread(msg,socket));
+        Library_Server.executorService.execute(new sendMessThread(msg, socket));
     }
 }
